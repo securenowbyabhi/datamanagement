@@ -15,9 +15,9 @@ steps:
 
   - script: |
       python -m pip install --upgrade pip
-      pip install -r HW8/requirements.txt
+      pip install -r requirements.txt
     displayName: 'Install Python deps'
 
   - script: |
-      python HW8/ingest.py
+      python ingest.py
     displayName: 'Run ingestion to Azure SQL'
