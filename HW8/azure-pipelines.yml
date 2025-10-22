@@ -1,4 +1,4 @@
-trigger:
+﻿trigger:
   branches:
     include:
       - main
@@ -15,9 +15,9 @@ steps:
 
   - script: |
       python -m pip install --upgrade pip
-      pip install -r requirements.txt
+      pip install -r HW8/requirements.txt
     displayName: 'Install Python deps'
 
   - script: |
-      python ingest.py
+      python HW8/ingest.py
     displayName: 'Run ingestion to Azure SQL'
