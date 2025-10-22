@@ -1,32 +1,23 @@
-
-trigger:
+﻿trigger:
   branches:
     include:
       - main
 
 pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  BRAND_CSV: 'data/brand-detail-url-etc_0_0_0.csv'
-  DAILY_CSV: 'data/2021-01-19--data_01be88c2-0306-48b3-0042-fa0703282ad6_1304_5_0.csv'
+  vmImage: 'windows-latest'
 
 steps:
   - checkout: self
+
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: '3.x'
+      versionSpec: '3.11'
+
   - script: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-    displayName: 'Install deps'
+    displayName: 'Install Python deps'
+
   - script: |
-      python ingest_data.py
-    displayName: 'Ingest CSVs to Azure SQL'
-    env:
-      AZ_SQL_SERVER: $(AZ_SQL_SERVER)
-      AZ_SQL_DB: $(AZ_SQL_DB)
-      AZ_SQL_USER: $(AZ_SQL_USER)
-      AZ_SQL_PASSWORD: $(AZ_SQL_PASSWORD)
-      BRAND_CSV: $(BRAND_CSV)
-      DAILY_CSV: $(DAILY_CSV)
+      python ingest.py
+    displayName: 'Run ingestion to Azure SQL'
